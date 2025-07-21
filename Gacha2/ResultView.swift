@@ -12,6 +12,8 @@ struct ResultView: View {
     @State var backGroundImageName: String = "bgRed"
     @State var characterImageName: String = "iphone"
     @State var star = "⭐️⭐️"
+    @State private var imageOffset = 0.0
+    let animationHeight: CGFloat = -50
     
     var body: some View {
         ZStack {
@@ -22,7 +24,12 @@ struct ResultView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 350, height: 350)
-                .offset(y: -50)
+                .offset(y: CGFloat(imageOffset) - 50)
+                .onAppear {
+                    withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                        imageOffset = animationHeight
+                    }
+                }
             VStack {
                 HStack {
                     Button {
