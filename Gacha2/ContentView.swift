@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showSheet = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            Image("gacha")
+                .resizable()
+                .ignoresSafeArea()
+            Button {
+                showSheet = true
+            } label: {
+                Image("Presentbox")
+                    .resizable()
+                    .scaledToFit()
+            }
         }
-        .padding()
+        .fullScreenCover(isPresented: $showSheet) {
+            ResultView()
+        }
     }
 }
 
